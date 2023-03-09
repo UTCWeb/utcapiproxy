@@ -48,7 +48,7 @@ class Credentialtrust extends Controller
     public function show($id)
     {
         $phpProjects = Http::withHeaders([
-        ])->get('https://secure.cecredentialtrust.com:8086/api/webapi/v3/CeCredentialValidate/95848d1d-07d0-4667-91f5-96887d32c64c/'.$id)->json();
+        ])->get(env('UTC_CREDENTIAL_VERIFICATION').$id)->json();
         return $phpProjects;
     }
 
