@@ -43,23 +43,36 @@ class WPRestCache extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  string  $id
+     * @param  int     $numberofarticles
+     * @param  string  $categories
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
-        $wpResponse = Cache::pull('wpResponsekey'.$id);
-        if($wpResponse === null) {
-            
-            Log::channel('stderr')->info('using the cache');
-            $wpResponse = Http::withHeaders([
-            ])->get("https://blog.utc.edu/news/wp-json/wp/v2/posts?_embed&per_page=".$id)->json();
-            Cache::put('wpResponsekey'.$id,$wpResponse, now()->addMinutes(10));
+
+
+        // Checks if the response key json exist already or it fetches a new one.
+        $wpResponse = null;
+        if (Cache::has('wpResponsekey'.$id)) {
+            dd("cached content");
+            $wpResponse = Cache::pull('wpResponsekey'.$id);
             return $wpResponse;
-        } 
-        // return 'Using cached value';
+        }
+        // ])->get("https://blog.utc.edu/".$id."/wp-json/wp/v2/posts?_embed&per_page=".$id)->json();
+        // $wpResponse = Http::withHeaders([
+        // ])->get("https://blog.utc.edu/".$id."/wp-json/wp/v2/posts?_embed&per_page=".$id)->json();
+        // Cache::put('wpResponsekey'.$id, $wpResponse, now()->addMinutes(10));
+        // return $wpResponse;
+        $wpResponse = Http::withHeaders([])->get("https://blog.utc.edu/".$id."/wp-json/wp/v2/posts", [
+            '_embed' => '1',
+            'per_page' => '4',
+            // 'categories' => 4,
+        ])->json();
+        Cache::put('wpResponsekey'.$id, $wpResponse, now()->addMinutes(10));
         return $wpResponse;
+
+
 
     }
 
