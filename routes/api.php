@@ -21,4 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/credential/{id}', [Credentialtrust::class, 'show']);
-Route::get('/wpcache/{id}', [WPRestCache::class, 'show']);
+Route::put('/wpcache/{id}', [WPRestCache::class, 'update']);
