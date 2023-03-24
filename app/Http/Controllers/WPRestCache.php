@@ -22,13 +22,13 @@ class WPRestCache extends Controller
         // Checks if the response key json exist already or it fetches a new one.
         // It uses web query paraemeters to determine if more info is needed or
         // it defaults to 4 items with any category on a given blog id(name).
+        dd($id);
         $wpResponse = $wpqueryparameters = $wpper_page = $wpcategories = null;
         $wpper_page = $request->input('per_page') ?? '4';
         $wpcategories = $request->input('categories');
         $wpqueryparameters = implode(",", array_filter([$wpper_page, $wpcategories])) ;
         if ($wpper_page > 12 ? $wpper_page = 12 : $wpper_page);
         if (Cache::has('wpResponsekey'.$id.$wpqueryparameters)) {
-            dd("cached content");
             $wpResponse = Cache::pull('wpResponsekey'.$id.$wpqueryparameters);
             return $wpResponse;
         }
