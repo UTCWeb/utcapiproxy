@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Credentialtrust;
+use App\Http\Controllers\WPRestCache;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/credential/{id}', [Credentialtrust::class, 'show']);
+Route::put('/wpcache/{id}', [WPRestCache::class, 'update']);
