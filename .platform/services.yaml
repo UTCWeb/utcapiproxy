@@ -1,0 +1,6 @@
+db:
+  type: mariadb:10.11
+  disk: 512
+
+#cache:
+#  type: redis:6.4
