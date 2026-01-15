@@ -10,7 +10,6 @@ type: php:8.4
 # Set the timezone for the application.
 timezone: 'America/New_York'
 
-
 dependencies:
   php:
     composer/composer: '^2'
