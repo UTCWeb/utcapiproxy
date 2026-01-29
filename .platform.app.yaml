@@ -14,9 +14,9 @@ dependencies:
   php:
     composer/composer: '^2'
 
-runtime:
-  extensions:
-    - redis
+#runtime:
+#  extensions:
+#    - redis
 
 build:
   flavor: composer
