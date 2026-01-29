@@ -95,26 +95,6 @@ web:
       root: "storage/app/public"
       scripts: false
 
-# Note that use of workers require a Medium plan or larger.
-workers:
-  queue:
-    size: S
-    commands:
-      # To minimize leakage, the queue worker will stop every hour
-      # and get restarted automatically.
-      start: |
-        php artisan queue:work --max-time=3600
-    # set the worker's disk to the minimum amount
-    disk: 256
-  scheduler:
-    size: S
-    commands:
-      start: php artisan schedule:work
-    # set the worker's disk to the minimum amount
-    disk: 256
-
-
-
 source:
   operations:
     auto-update:
