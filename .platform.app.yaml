@@ -56,7 +56,7 @@ relationships:
 #  redissession: "cache:redis"
 
 # The size of the persistent disk of the application (in MB).
-disk: 512
+disk: 2048
 
 # The mounts that will be performed when the package is deployed.
 mounts:
